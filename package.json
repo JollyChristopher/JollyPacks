@@ -1,0 +1,37 @@
+{
+  "name": "jollypacks",
+  "version": "1.0.0",
+  "description": "I'll be making Minecraft datapacks, and figure that a lot of process will be the same so they'll all be in here.",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "del-cli build",
+    "build": "npm-run-all -s build-mkfolder build-cppacks",
+    "build-mkfolder": "mkdirp build",
+    "build-cppacks": "cpy --parents --cwd=src '**' ../build",
+    "predist": "npm run build && del-cli dist",
+    "dist": "npm-run-all -s dist-mkfolder dist-ore-exchange",
+    "dist-mkfolder": "mkdirp dist",
+    "dist-ore-exchange": "cd build/ore_exchange && bestzip ../../dist/ore_exchange-${npm_package_versions_ore_exchange}.zip '**'",
+    "test": "echo ${npm_package_versions_ore_exchange}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halemaster/JollyPacks.git"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/halemaster/JollyPacks/issues"
+  },
+  "homepage": "https://github.com/halemaster/JollyPacks#readme",
+  "versions": {
+    "ore_exchange": "v1.0.0"
+  },
+  "devDependencies": {
+    "bestzip": "^2.2.0",
+    "cpy-cli": "^3.1.1",
+    "del-cli": "^3.0.1",
+    "mkdirp": "^1.0.4",
+    "npm-run-all": "^4.1.5"
+  }
+}
