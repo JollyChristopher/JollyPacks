@@ -11,7 +11,7 @@
     "predist": "npm run build && del-cli dist",
     "dist": "npm-run-all -s dist-mkfolder dist-ore-exchange",
     "dist-mkfolder": "mkdirp dist",
-    "dist-ore-exchange": "cd build/ore_exchange && bestzip ../../dist/ore_exchange-${npm_package_versions_ore_exchange}.zip '**'",
+    "dist-ore-exchange": "cd build/ore_exchange && jszip-cli add ** > ../../dist/ore_exchange-${npm_package_versions_ore_exchange}.zip",
     "test": "echo ${npm_package_versions_ore_exchange}"
   },
   "repository": {
@@ -28,7 +28,7 @@
     "ore_exchange": "v1.0.0"
   },
   "devDependencies": {
-    "bestzip": "^2.2.0",
+    "@ffflorian/jszip-cli": "^3.1.0",
     "cpy-cli": "^3.1.1",
     "del-cli": "^3.0.1",
     "mkdirp": "^1.0.4",
