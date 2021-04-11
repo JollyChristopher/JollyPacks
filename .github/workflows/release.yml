@@ -57,4 +57,4 @@ jobs:
           automatic_release_tag: "test"
           title: "Development Build"
           files: |
-            dist/${{ secrets.ore-exchange.outputs.version }}.zip
+            dist/${{ steps.ore-exchange.outputs.version }}.zip
