@@ -37,7 +37,7 @@ jobs:
       - name: Build zips
         run: npm run dist
       
-      # test ore-exchange version
+      # Deploy ore-exchange
       - name: Set ore-exchange version
         run: echo "::set-output name=version::$(npm run --silent version-ore-exchange)"
         id: ore-exchange
@@ -48,10 +48,9 @@ jobs:
           tag: "ore_exchange-${{ steps.ore-exchange.outputs.version }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: echo ${{ steps.ore-exchange-exists.outputs.exists }}
       
       - uses: "marvinpinto/action-automatic-releases@latest"
+        if: ${{ !steps.ore-exchange-exists.outputs.exists }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "ore_exchange-${{ steps.ore-exchange.outputs.version }}"
