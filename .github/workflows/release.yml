@@ -50,3 +50,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: echo ${{ steps.ore-exchange-tag.outputs.exists }}
+      
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "test"
+          title: "Development Build"
+          files: |
+            dist/${{ secrets.ore-exchange.outputs.version }}.zip
