@@ -13,6 +13,7 @@
     "dist-mkfolder": "mkdirp dist",
     "dist-ore-exchange": "cd build/ore_exchange && jszip-cli add ** > ../../dist/ore_exchange-${npm_package_versions_ore_exchange}.zip",
     "release-ore-exchange": "echo ore_exchange-${npm_package_versions_ore_exchange}",
+    "version-ore-exchange": "echo ${npm_package_versions_ore_exchange}",
     "test": "echo ${npm_package_versions_ore_exchange}"
   },
   "repository": {
