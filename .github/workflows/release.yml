@@ -52,7 +52,7 @@ jobs:
       - run: "echo ${{ steps.ore-exchange-exists.outputs.exists }}"
       
       - uses: "marvinpinto/action-automatic-releases@latest"
-        if: steps.ore-exchange-exists.outputs.exists == false
+        if: steps.ore-exchange-exists.outputs.exists == 'false'
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "ore_exchange-${{ steps.ore-exchange.outputs.version }}"
