@@ -45,7 +45,7 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.0.0
         id: ore-exchange-tag
         with: 
-          tag: $({ steps.ore-exchange.outputs.version })
+          tag: ${{ steps.ore-exchange.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
