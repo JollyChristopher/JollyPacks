@@ -20,14 +20,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: mukunku/tag-exists-action@v1.0.0
-        id: checkTag
-        with: 
-          tag: 'v1'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: echo ${{ steps.checkTag.outputs.exists }}
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
@@ -44,3 +36,17 @@ jobs:
       # run Dist
       - name: Build zips
         run: npm run dist
+      
+      # test ore-exchange version
+      - name: Set ore-exchange version
+        run: echo "::set-output name=version::$(npm run release-ore-exchange)"
+        id: ore-exchange
+      
+      - uses: mukunku/tag-exists-action@v1.0.0
+        id: ore-exchange-tag
+        with: 
+          tag: $({ steps.ore-exchange.outputs.version })
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: echo ${{ steps.ore-exchange-tag.outputs.exists }}
