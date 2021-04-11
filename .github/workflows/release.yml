@@ -39,7 +39,7 @@ jobs:
       
       # test ore-exchange version
       - name: Set ore-exchange version
-        run: echo "::set-output name=version::$(npm run release-ore-exchange)"
+        run: echo "::set-output name=version::$(npm run --silent release-ore-exchange)"
         id: ore-exchange
       
       - uses: mukunku/tag-exists-action@v1.0.0
