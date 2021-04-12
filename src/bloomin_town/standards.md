@@ -2,12 +2,12 @@ This section uses [mcdatapacks](https://mc-datapacks.github.io/en/index.html) st
 
 This datapack is a NiT addon.
 
-- [ ] Datapack Advancement: Added advancement as per the standard. Tests ensure these are used properly.
+- [X] Datapack Advancement: Added advancement as per the standard. Tests ensure these are used properly.
 - [ ] Datapack Uninstallation:
 - [ ] Common Trait Convention:
 - [ ] Custom Model ID: NOT NEEDED
 - [ ] Global Ignoring Tag:
 - [ ] Global Durability: NOT NEEDED
-- [ ] Namespace Convention: using bloomin_town namespac
+- [X] Namespace Convention: using bloomin_town namespace
 - [ ] Shulker Box Loot Table:  NOT NEEDED
 - [ ] Reloading Message:
