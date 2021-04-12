@@ -2,7 +2,7 @@ This section uses [mcdatapacks](https://mc-datapacks.github.io/en/index.html) st
 
 This datapack is just recipes, most of these conventions do not apply outside of mcfunction files
 
-- [ ] Datapack Advancement: TODO
+- [x] Datapack Advancement: Added advancement as per the standard. Tests ensure these are used properly.
 - [x] Datapack Uninstallation: NOT NEEDED
 - [x] Common Trait Convention: NOT NEEDED
 - [x] Custom Model ID: NOT NEEDED

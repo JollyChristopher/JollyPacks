@@ -1,5 +1,6 @@
 const { should } = require('chai');
 should();
+const { packTests } = require('./pack_common.js');
 // const { startServer, endServer } = require('./server.js');
 
 describe('Ore Exchange', function () {
@@ -22,6 +23,28 @@ describe('Ore Exchange', function () {
   //     done(error);
   //   });
   // });
+
+  describe('installed datapacks advancements', function () {
+    packTests('ore_exchange');
+    it('should have ore_exchange', function () {
+      const json = require('../build/ore_exchange/data/ore_exchange/advancements/ore_exchange.json');
+      json.should.have.deep.property('display', {
+        title: 'Ore Exchange',
+        description: 'Exchange Ores between different stone types',
+        icon: {
+          item: 'minecraft:deepslate_copper_ore'
+        },
+        announce_to_chat: false,
+        show_toast: false
+      });
+      json.should.have.property('parent', 'global:jolly_packs');
+      json.should.have.deep.property('criteria', {
+        trigger: {
+          trigger: 'minecraft:tick'
+        }
+      });
+    });
+  });
 
   describe('crafting recipes', function () {
     const recipeBase = '../build/ore_exchange/data/ore_exchange/recipes';
