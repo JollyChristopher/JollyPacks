@@ -26,3 +26,9 @@ jobs:
       # run Test
       - name: Run Tests
         run: npm test
+      
+      # Artifact the packs in case we want to manually test
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist/
