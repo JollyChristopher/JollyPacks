@@ -37,10 +37,12 @@
   },
   "homepage": "https://github.com/halemaster/JollyPacks#readme",
   "versions": {
-    "ore_exchange": "v1.0.0"
+    "ore_exchange": "v1.0.1"
   },
   "semistandard": {
-    "env": [ "mocha" ]
+    "env": [
+      "mocha"
+    ]
   },
   "devDependencies": {
     "@ffflorian/jszip-cli": "^3.1.0",
