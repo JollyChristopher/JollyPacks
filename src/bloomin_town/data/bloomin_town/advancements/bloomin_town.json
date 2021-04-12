@@ -1,0 +1,17 @@
+{
+    "display": {
+        "title": "Bloomin' Town",
+        "description": "Spring time in New in Town!",
+        "icon": {
+            "item": "minecraft:sweet_berries"
+        },
+        "announce_to_chat": false,
+        "show_toast": false
+    },
+    "parent": "global:jolly_packs",
+    "criteria": {
+        "trigger": {
+            "trigger": "minecraft:tick"
+        }
+    }
+}
