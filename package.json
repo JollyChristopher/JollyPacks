@@ -13,7 +13,15 @@
     "dist-mkfolder": "mkdirp dist",
     "dist-ore-exchange": "cd build/ore_exchange && jszip-cli add ** > ../../dist/ore_exchange-${npm_package_versions_ore_exchange}.zip",
     "version-ore-exchange": "echo ${npm_package_versions_ore_exchange}",
-    "test": "echo ${npm_package_versions_ore_exchange}"
+    "prerun-server": "cpy 'dist/*.zip' servers/test/world/datapacks",
+    "run-server": "docker run -d -p 25565:25565 --name minecraft -v /${PWD}/servers/test:/data -e SPAWN_MONSTERS=false -e EULA=TRUE -e VERSION=${mc_version} -e ENABLE_COMMAND_BLOCK=true -e SPAWN_PROTECTION=0 -e ONLINE_MODE=false -e WHITELIST=JollyChristopher,jollypack_tester -e OPS=JollyChristopher,jollypack_tester itzg/minecraft-server",
+    "compile-server-world": "mkdirp servers/test && cpy --parents '**' ../test --cwd=servers/${mc_version}",
+    "run-server-latest": "export mc_version=latest && npm run compile-server-world && export mc_version=LATEST && npm run run-server",
+    "run-server-snapshot": "export mc_version=snapshot && npm run compile-server-world && export mc_version=SNAPSHOT && npm run run-server",
+    "close-server": "docker rm -f minecraft",
+    "postclose-server": "del-cli servers/test",
+    "pretest": "npm run dist",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -30,9 +38,13 @@
   },
   "devDependencies": {
     "@ffflorian/jszip-cli": "^3.1.0",
+    "chai": "^4.3.4",
     "cpy-cli": "^3.1.1",
     "del-cli": "^3.0.1",
+    "mineflayer": "^3.6.0",
     "mkdirp": "^1.0.4",
-    "npm-run-all": "^4.1.5"
+    "mocha": "^8.3.2",
+    "npm-run-all": "^4.1.5",
+    "prismarine-viewer": "^1.19.2"
   }
 }
