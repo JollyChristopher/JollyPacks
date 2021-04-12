@@ -24,8 +24,8 @@ jobs:
         run: npm install
       
       # run Dist
-      - name: Build zips
-        run: npm run dist
+      - name: Build zips and test
+        run: npm test
       
       # Deploy ore-exchange
       - name: Set ore-exchange version
