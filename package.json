@@ -20,6 +20,7 @@
     "compile-server-world": "mkdirp servers/test && cpy --parents '**' ../test --cwd=servers/${mc_version}",
     "run-server-latest": "export mc_version=latest && npm run compile-server-world && export mc_version=LATEST && npm run run-server",
     "run-server-snapshot": "export mc_version=snapshot && npm run compile-server-world && export mc_version=SNAPSHOT && npm run run-server",
+    "check-server-status": "docker container inspect -f \"{{.State.Health.Status}}\" minecraft",
     "close-server": "docker rm -f minecraft",
     "postclose-server": "del-cli servers/test",
     "lint-fix": "npm run test-lint -- --fix",
@@ -55,6 +56,7 @@
     "mineflayer": "^3.6.0",
     "mkdirp": "^1.0.4",
     "mocha": "^8.3.2",
+    "node-canvas-webgl": "^0.2.6",
     "npm-run-all": "^4.1.5",
     "prismarine-viewer": "^1.19.2",
     "semistandard": "^16.0.0"
