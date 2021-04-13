@@ -22,7 +22,7 @@
     "run-server-snapshot": "export mc_version=snapshot && npm run compile-server-world && export mc_version=SNAPSHOT && npm run run-server",
     "check-server-status": "docker container inspect -f \"{{.State.Health.Status}}\" minecraft",
     "close-server": "docker rm -f minecraft",
-    "postclose-server": "rm -rf servers/test/world",
+    "postclose-server": "sudo rm -rf servers/test/world",
     "lint-fix": "npm run test-lint -- --fix",
     "test": "npm-run-all -s test-lint test-unit",
     "test-lint": "semistandard",
