@@ -1,29 +1,9 @@
 const { should } = require('chai');
 should();
 const { packTests } = require('./pack_common.js');
-// const { startServer, endServer } = require('./server.js');
+const { startServer, endServer } = require('./server.js');
 
 describe('Bloomin Town', function () {
-  // let minebot;
-  // this.beforeAll(function(done) {
-  //   this.timeout(120000);
-  //   startServer('snapshot').then((bot) => {
-  //     minebot = bot;
-  //     done();
-  //   }).catch(error => {
-  //     done(error);
-  //   });
-  // });
-
-  // this.afterAll(function(done) {
-  //   this.timeout(5000);
-  //   endServer(minebot).then(() => {
-  //     done();
-  //   }).catch(error => {
-  //     done(error);
-  //   });
-  // });
-
   describe('installed datapacks advancements', function () {
     packTests('bloomin_town');
     it('should have bloomin_town', function () {
@@ -43,6 +23,32 @@ describe('Bloomin Town', function () {
           trigger: 'minecraft:tick'
         }
       });
+    });
+  });
+
+  describe('latest version tests', function () {
+    let minebot;
+    this.beforeAll(function (done) {
+      this.timeout(120000);
+      startServer('latest').then((bot) => {
+        minebot = bot;
+        done();
+      }).catch(error => {
+        done(error);
+      });
+    });
+
+    this.afterAll(function (done) {
+      this.timeout(5000);
+      endServer(minebot).then(() => {
+        done();
+      }).catch(error => {
+        done(error);
+      });
+    });
+
+    it('not a test!', function () {
+
     });
   });
 });
