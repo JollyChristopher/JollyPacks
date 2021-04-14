@@ -26,7 +26,7 @@
     "lint-fix": "npm run test-lint -- --fix",
     "test": "npm-run-all -s test-lint test-unit",
     "test-lint": "semistandard",
-    "pretest-unit": "npm run dist",
+    "pretest-unit": "npm run dist && mkdirp test-output",
     "test-unit": "mocha --reporter mocha-multi-reporters --reporter-options configFile=reporters.json"
   },
   "repository": {
