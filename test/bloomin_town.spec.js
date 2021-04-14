@@ -145,7 +145,7 @@ describe('Bloomin Town', function () {
         return await minebot.nearestEntity((entity) => {
           return entity.mobType === 'Villager' && entity.metadata[2] === '{"text":"Town Planner"}' && entity.position.distanceTo(minebot.entity.position) < 8;
         });
-      }, 10000)).should.be.equal(true, 'Could not find Town Planner');
+      }, 20000)).should.be.equal(true, 'Could not find Town Planner');
     });
     it('should be able to build rabbit pen', async function () {
       this.timeout(30000);
