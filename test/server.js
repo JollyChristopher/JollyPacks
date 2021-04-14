@@ -2,8 +2,8 @@
 // I could also attempt to add support myself at some point, but not now.
 const { exec } = require('child_process');
 const mineflayer = require('mineflayer');
-// const { headless: mineflayerViewer } = require('prismarine-viewer');
-
+// const { headless: mineflayerViewer } = require('prismarine-viewer'); // issue with the video processor...
+let bot;
 exports.startServer = function (version = 'latest', videoName = 'output') {
   return new Promise((resolve, reject) => {
     exec(`npm run run-server-${version}`, (error) => {
@@ -32,9 +32,12 @@ exports.startServer = function (version = 'latest', videoName = 'output') {
   }).then(() => {
     console.log('creating bot');
     return new Promise((resolve, reject) => {
-      const bot = mineflayer.createBot({
+      bot = mineflayer.createBot({
         host: 'localhost',
         username: 'jollypack_tester'
+      });
+      bot.on('message', (message) => {
+        console.log(`${message}`);
       });
       bot.on('kicked', reject);
       bot.on('error', reject);
@@ -48,15 +51,24 @@ exports.startServer = function (version = 'latest', videoName = 'output') {
   });
 };
 
-exports.endServer = function (bot) {
+exports.endServer = function () {
   // end the running server
   return new Promise((resolve, reject) => {
-    bot.end();
     exec('npm run close-server', (error) => {
+      bot.quit();
+      bot = null;
       if (error) reject(error);
       else resolve();
     });
   }).then(() => {
     console.log('server ended!');
   });
+};
+
+exports.itemToString = function (item) {
+  if (item) {
+    return `${item.name}x${item.count}`;
+  } else {
+    return 'nothing';
+  }
 };

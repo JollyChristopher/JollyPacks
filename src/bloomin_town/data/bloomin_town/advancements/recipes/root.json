@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:sweet_berries"
+    },
+    "title": "Bloomin Town Recipes",
+    "description": "Spring time recipes for New in Town.",
+    "frame": "task",
+    "background": "minecraft:textures/block/lime_wool.png",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "exists": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

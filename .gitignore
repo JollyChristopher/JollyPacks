@@ -106,3 +106,4 @@ build
 
 # Test world
 servers/test/
+test-output/
