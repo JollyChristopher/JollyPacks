@@ -26,12 +26,6 @@ jobs:
       # run Dist
       - name: Build zips and test
         run: npm test
-
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always()
-        with:
-          files: test-output/test-results.xml
       
       # Deploy ore-exchange
       - name: Set ore-exchange version
