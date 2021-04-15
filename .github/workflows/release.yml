@@ -56,3 +56,27 @@ jobs:
           prerelease: false
           files: |
             dist/ore_exchange-${{ steps.ore-exchange.outputs.version }}.zip
+
+      # Deploy bloomin-town
+      - name: Set bloomin-town version
+        run: echo "::set-output name=version::$(npm run --silent version-bloomin-town)"
+        id: bloomin-town
+      
+      - uses: mukunku/tag-exists-action@v1.0.0
+        id: bloomin-town-exists
+        with: 
+          tag: "bloomin_town-${{ steps.bloomin-town.outputs.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - run: "echo ${{ steps.bloomin-town-exists.outputs.exists }}"
+      
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        if: steps.bloomin-town-exists.outputs.exists == 'false'
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "bloomin_town-${{ steps.bloomin-town.outputs.version }}"
+          title: "Bloomin Town ${{ steps.bloomin-town.outputs.version }}"
+          prerelease: false
+          files: |
+            dist/bloomin_town-${{ steps.bloomin-town.outputs.version }}.zip
