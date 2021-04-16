@@ -3,7 +3,7 @@ This section uses [mcdatapacks](https://mc-datapacks.github.io/en/index.html) st
 This datapack is a NiT addon.
 
 - [X] Datapack Advancement: Added advancement as per the standard. Tests ensure these are used properly.
-- [X] Datapack Uninstallation:
+- [X] Datapack Uninstallation: Removes any armor stands with the bloomin_town.flower_grow tag (pack specific)
 - [X] Common Trait Convention: NOT NEEDED
 - [X] Custom Model ID: NOT NEEDED
 - [X] Global Ignoring Tag: Used in the villager in my structure and armor stands
