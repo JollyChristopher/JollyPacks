@@ -1,5 +1,5 @@
-const { should } = require('chai');
-should();
+/* eslint-disable no-unused-expressions */
+const should = require('chai').should();
 const { Vec3 } = require('vec3');
 const { packTests, testRecipes, asyncAssert, permitText } = require('./pack_common.js');
 const { startServer, endServer, itemToString } = require('./server.js');
@@ -89,6 +89,75 @@ describe('Bloomin Town', function () {
             key: 'H'
           }
         }
+      },
+      {
+        id: 'flower_shop',
+        name: 'Flower Shop',
+        icon: 'minecraft:allium',
+        recipe: [
+          {
+            id: 'dandelion',
+            count: 8
+          },
+          {
+            id: 'oak_log',
+            count: 32
+          },
+          {
+            id: 'poppy',
+            count: 8
+          },
+          {
+            id: 'flower_pot',
+            count: 4
+          },
+          {
+            id: 'permit',
+            count: 1
+          },
+          {
+            id: 'flower_pot',
+            count: 4
+          },
+          {
+            id: 'stone',
+            count: 2
+          },
+          {
+            id: 'bricks',
+            count: 8
+          },
+          {
+            id: 'stone',
+            count: 2
+          }
+        ],
+        legend: {
+          oak_log: {
+            name: 'Oak Log',
+            key: 'L'
+          },
+          stone: {
+            name: 'Stone',
+            key: 'S'
+          },
+          dandelion: {
+            name: 'Dandelion',
+            key: 'D'
+          },
+          poppy: {
+            name: 'Poppy',
+            key: 'P'
+          },
+          flower_pot: {
+            name: 'Flower Pot',
+            key: 'F'
+          },
+          bricks: {
+            name: 'Brick Block',
+            key: 'B'
+          }
+        }
       }
     ];
     it('should have root for recipes', function () {
@@ -120,6 +189,7 @@ describe('Bloomin Town', function () {
       this.timeout(120000);
       startServer('latest').then((bot) => {
         minebot = bot;
+        minebot.chat('/gamemode creative');
         done();
       }).catch(error => {
         done(error);
@@ -154,7 +224,8 @@ describe('Bloomin Town', function () {
       minebot.chat('/give @s minecraft:carrot 16');
       minebot.chat('/give @s minecraft:rabbit_hide 4');
       minebot.chat(`/give @s minecraft:paper${permitText()}`);
-      minebot.chat('/tp @s -5 ~ 0');
+      minebot.chat('/tp @s -6 64 0');
+      await minebot.waitForTicks(10);
       const dropperBlock = minebot.blockAt(new Vec3(-7, 64, 0));
       let dropper = await minebot.openContainer(dropperBlock);
       dropper.on('updateSlot', (slot, oldItem, newItem) => {
@@ -163,15 +234,15 @@ describe('Bloomin Town', function () {
       dropper.on('close', () => {
         minebot.chat('planner closed');
       });
-      await minebot.transfer({ window: dropper, itemType: 37, count: 8, sourceStart: 36, destStart: 0, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 37, count: 16, sourceStart: 36, destStart: 1, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 37, count: 8, sourceStart: 36, destStart: 2, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 830, count: 16, sourceStart: 38, destStart: 3, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 677, count: 1, sourceStart: 40, destStart: 4, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 859, count: 4, sourceStart: 39, destStart: 5, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 37, destStart: 6, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 1, count: 4, sourceStart: 37, destStart: 7, sourceEnd: null, destEnd: null });
-      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 37, destStart: 8, sourceEnd: null, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 37, count: 8, sourceStart: 36, destStart: 0, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 37, count: 16, sourceStart: 36, destStart: 1, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 37, count: 8, sourceStart: 36, destStart: 2, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 830, count: 16, sourceStart: 36, destStart: 3, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 677, count: 1, sourceStart: 36, destStart: 4, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 859, count: 4, sourceStart: 36, destStart: 5, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 36, destStart: 6, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 4, sourceStart: 36, destStart: 7, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 36, destStart: 8, sourceEnd: 50, destEnd: null });
       dropper.close();
       dropper = await minebot.openContainer(dropperBlock);
       dropper.close();
@@ -180,7 +251,73 @@ describe('Bloomin Town', function () {
         return await minebot.nearestEntity((entity) => {
           return entity.mobType === 'Villager' && entity.metadata[2] === '{"text":"Rabbit Tender"}' && entity.position.distanceTo(minebot.entity.position) < 8;
         });
-      }, 10000)).should.be.equal(true, 'Could not find Rabbit Tender');
+      }, 10000)).should.be.true;
+    });
+    it('should be able to build flower shop', async function () {
+      this.timeout(30000);
+      minebot.chat('/give @s minecraft:oak_log 32');
+      minebot.chat('/give @s minecraft:stone 4');
+      minebot.chat('/give @s minecraft:dandelion 8');
+      minebot.chat('/give @s minecraft:poppy 8');
+      minebot.chat('/give @s minecraft:flower_pot 8');
+      minebot.chat('/give @s minecraft:bricks 8');
+      minebot.chat(`/give @s minecraft:paper${permitText()}`);
+      minebot.chat('/tp @s 0 64 -6');
+      await minebot.waitForTicks(10);
+      const dropperBlock = minebot.blockAt(new Vec3(0, 64, -7));
+      let dropper = await minebot.openContainer(dropperBlock);
+      dropper.on('updateSlot', (slot, oldItem, newItem) => {
+        if (slot < 9) minebot.chat(`planner update: ${itemToString(oldItem)} -> ${itemToString(newItem)} (slot: ${slot})`);
+      });
+      dropper.on('close', () => {
+        minebot.chat('planner closed');
+      });
+      await minebot.transfer({ window: dropper, itemType: 111, count: 8, sourceStart: 36, destStart: 0, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 37, count: 32, sourceStart: 36, destStart: 1, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 112, count: 8, sourceStart: 36, destStart: 2, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 829, count: 4, sourceStart: 36, destStart: 3, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 677, count: 1, sourceStart: 36, destStart: 4, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 829, count: 4, sourceStart: 36, destStart: 5, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 36, destStart: 6, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 166, count: 8, sourceStart: 36, destStart: 7, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 36, destStart: 8, sourceEnd: 50, destEnd: null });
+      dropper.close();
+      dropper = await minebot.openContainer(dropperBlock);
+      dropper.close();
+      minebot.chat('/tp @s -2 ~ -18');
+      (await asyncAssert(async () => {
+        return await minebot.nearestEntity((entity) => {
+          return entity.mobType === 'Villager' && entity.metadata[2] === '{"text":"Florist"}' && entity.position.distanceTo(minebot.entity.position) < 8;
+        });
+      }, 10000)).should.be.true;
+    });
+    it('should be able to get flowers to grow', async function () {
+      this.timeout(30000);
+      minebot.chat('/tp @s -1 64 -11');
+      await minebot.waitForTicks(10);
+      const bushBlock = minebot.blockAt(new Vec3(-1, 64, -12));
+      await minebot.dig(bushBlock);
+      minebot.blockAt(new Vec3(0, 64, -12)).name.should.be.equal('flower_pot');
+      (await asyncAssert(async () => {
+        minebot.chat('/time set 5995');
+        await minebot.waitForTicks(10);
+        const pot = minebot.blockAt(new Vec3(0, 64, -12));
+        console.log(pot.name);
+        return pot.name === 'potted_brown_mushroom';
+      }, 10000)).should.be.true;
+    });
+    it('should be able to uninstall the pack', async function () {
+      this.timeout(30000);
+      minebot.chat('/tp @s -1 64 -11');
+      await minebot.waitForTicks(5);
+      (await minebot.nearestEntity((entity) => {
+        return entity.mobType === 'Armor Stand' && entity.position.distanceTo(minebot.entity.position) < 8;
+      })).name.should.be.equal('armor_stand');
+      minebot.chat('/function bloomin_town:uninstall');
+      await minebot.waitForTicks(10);
+      should.equal(await minebot.nearestEntity((entity) => {
+        return entity.mobType === 'Armor Stand' && entity.position.distanceTo(minebot.entity.position) < 8;
+      }), null);
     });
   });
 });
