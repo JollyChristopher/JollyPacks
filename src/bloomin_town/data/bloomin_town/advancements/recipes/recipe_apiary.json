@@ -1,0 +1,30 @@
+{
+  "parent": "bloomin_town:recipes/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:beehive"
+    },
+    "title": "Apiary Crafting",
+    "description": "Q = Building Permit\nL = Oak Log\nD = Dandelion\nH = Honeycomb\nB = Bee Hive\nLx4 | Lx8 | Lx4\nDx4 | Q | Dx4\nB | Hx9 | B",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "rewards": {
+    "function": "bloomin_town:siteplanner/build_apiary"
+  },
+  "criteria": {
+    "open-dropper": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "dropper",
+			"nbt":"{Items:[{Slot:0b,id:\"minecraft:oak_log\",Count:4b},{Slot:1b,id:\"minecraft:oak_log\",Count:8b},{Slot:2b,id:\"minecraft:oak_log\",Count:4b},{Slot:3b,id:\"minecraft:dandelion\",Count:4b},{Slot:4b,id:\"minecraft:paper\",Count:1b,tag:{HideFlags:1,display:{Lore:['{\"text\":\"The final ingredient\"}','{\"text\":\"in new town structures.\"}'],Name:'{\"text\":\"Building Permit\"}'},Enchantments:[{lvl:0,id:\"minecraft:protection\"}]}},{Slot:5b,id:\"minecraft:dandelion\",Count:4b},{Slot:6b,id:\"minecraft:beehive\",Count:1b},{Slot:7b,id:\"minecraft:honeycomb\",Count:9b},{Slot:8b,id:\"minecraft:beehive\",Count:1b}]}"
+          }
+        }
+      }
+    }
+  }
+}
