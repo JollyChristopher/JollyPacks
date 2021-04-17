@@ -158,6 +158,67 @@ describe('Bloomin Town', function () {
             key: 'B'
           }
         }
+      },
+      {
+        id: 'apiary',
+        name: 'Apiary',
+        icon: 'minecraft:beehive',
+        recipe: [
+          {
+            id: 'oak_log',
+            count: 4
+          },
+          {
+            id: 'oak_log',
+            count: 8
+          },
+          {
+            id: 'oak_log',
+            count: 4
+          },
+          {
+            id: 'dandelion',
+            count: 4
+          },
+          {
+            id: 'permit',
+            count: 1
+          },
+          {
+            id: 'dandelion',
+            count: 4
+          },
+          {
+            id: 'beehive',
+            count: 1
+          },
+          {
+            id: 'honeycomb',
+            count: 9
+          },
+          {
+            id: 'beehive',
+            count: 1
+          }
+        ],
+        legend: {
+          oak_log: {
+            name: 'Oak Log',
+            key: 'L'
+          },
+          dandelion: {
+            name: 'Dandelion',
+            key: 'D'
+          },
+          honeycomb: {
+            name: 'Honeycomb',
+            key: 'H'
+          },
+          beehive: {
+            name: 'Bee Hive',
+            key: 'B'
+          }
+        }
       }
     ];
     it('should have root for recipes', function () {
@@ -291,6 +352,42 @@ describe('Bloomin Town', function () {
         });
       }, 10000)).should.be.true;
     });
+    it('should be able to build apiary', async function () {
+      this.timeout(30000);
+      minebot.chat('/give @s minecraft:oak_log 16');
+      minebot.chat('/give @s minecraft:dandelion 8');
+      minebot.chat('/give @s minecraft:honeycomb 9');
+      minebot.chat('/give @s minecraft:beehive 2');
+      minebot.chat(`/give @s minecraft:paper${permitText()}`);
+      minebot.chat('/tp @s 0 64 6');
+      await minebot.waitForTicks(10);
+      const dropperBlock = minebot.blockAt(new Vec3(0, 64, 7));
+      let dropper = await minebot.openContainer(dropperBlock);
+      dropper.on('updateSlot', (slot, oldItem, newItem) => {
+        if (slot < 9) minebot.chat(`planner update: ${itemToString(oldItem)} -> ${itemToString(newItem)} (slot: ${slot})`);
+      });
+      dropper.on('close', () => {
+        minebot.chat('planner closed');
+      });
+      await minebot.transfer({ window: dropper, itemType: 37, count: 4, sourceStart: 36, destStart: 0, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 37, count: 8, sourceStart: 36, destStart: 1, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 37, count: 4, sourceStart: 36, destStart: 2, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 111, count: 4, sourceStart: 36, destStart: 3, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 677, count: 1, sourceStart: 36, destStart: 4, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 111, count: 4, sourceStart: 36, destStart: 5, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 954, count: 1, sourceStart: 36, destStart: 6, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 952, count: 9, sourceStart: 36, destStart: 7, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 954, count: 1, sourceStart: 36, destStart: 8, sourceEnd: 50, destEnd: null });
+      dropper.close();
+      dropper = await minebot.openContainer(dropperBlock);
+      dropper.close();
+      minebot.chat('/tp @s -2 ~ 18');
+      (await asyncAssert(async () => {
+        return await minebot.nearestEntity((entity) => {
+          return entity.mobType === 'Villager' && entity.metadata[2] === '{"text":"Beekeeper"}' && entity.position.distanceTo(minebot.entity.position) < 8;
+        });
+      }, 10000)).should.be.true;
+    });
     it('should be able to get flowers to grow', async function () {
       this.timeout(30000);
       minebot.chat('/tp @s -1 64 -11');
@@ -304,7 +401,17 @@ describe('Bloomin Town', function () {
         const pot = minebot.blockAt(new Vec3(0, 64, -12));
         console.log(pot.name);
         return pot.name === 'potted_brown_mushroom';
-      }, 10000)).should.be.true;
+      }, 20000)).should.be.true;
+    });
+    it('should be able to get honey to be made', async function () {
+      this.timeout(30000);
+      minebot.chat('/tp @s -1 64 11');
+      await minebot.waitForTicks(10);
+      const barellBlock = minebot.blockAt(new Vec3(0, 64, 16));
+      const barell = await minebot.openContainer(barellBlock);
+      console.log(barell.slots[0]);
+      should.not.equal(barell.slots[0], null);
+      barell.slots[0].name.should.be.oneOf(['honeycomb', 'honey_bottle', 'honey_block', 'honeycomb_block', 'bee_nest', 'bee_spawn_egg']);
     });
     it('should be able to uninstall the pack', async function () {
       this.timeout(30000);
@@ -313,8 +420,19 @@ describe('Bloomin Town', function () {
       (await minebot.nearestEntity((entity) => {
         return entity.mobType === 'Armor Stand' && entity.position.distanceTo(minebot.entity.position) < 8;
       })).name.should.be.equal('armor_stand');
+      minebot.chat('/tp @s -1 64 11');
+      await minebot.waitForTicks(5);
+      (await minebot.nearestEntity((entity) => {
+        return entity.mobType === 'Armor Stand' && entity.position.distanceTo(minebot.entity.position) < 8;
+      })).name.should.be.equal('armor_stand');
       minebot.chat('/function bloomin_town:uninstall');
+      minebot.chat('/tp @s -1 64 -11');
       await minebot.waitForTicks(10);
+      should.equal(await minebot.nearestEntity((entity) => {
+        return entity.mobType === 'Armor Stand' && entity.position.distanceTo(minebot.entity.position) < 8;
+      }), null);
+      minebot.chat('/tp @s -1 64 11');
+      await minebot.waitForTicks(5);
       should.equal(await minebot.nearestEntity((entity) => {
         return entity.mobType === 'Armor Stand' && entity.position.distanceTo(minebot.entity.position) < 8;
       }), null);
