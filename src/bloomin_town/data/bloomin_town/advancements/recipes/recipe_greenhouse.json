@@ -1,0 +1,30 @@
+{
+  "parent": "bloomin_town:recipes/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:glass"
+    },
+    "title": "Greenhouse Crafting",
+    "description": "Q = Building Permit\nG = Glass\nS = Stone\nC = Composter\nO = Oak Leaves\nGx4 | Gx8 | Gx4\nC | Q | Ox16\nSx2 | Sx2 | Sx2",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "rewards": {
+    "function": "bloomin_town:siteplanner/build_greenhouse"
+  },
+  "criteria": {
+    "open-dropper": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "dropper",
+			"nbt":"{Items:[{Slot:0b,id:\"minecraft:glass\",Count:4b},{Slot:1b,id:\"minecraft:glass\",Count:8b},{Slot:2b,id:\"minecraft:glass\",Count:4b},{Slot:3b,id:\"minecraft:composter\",Count:1b},{Slot:4b,id:\"minecraft:paper\",Count:1b,tag:{HideFlags:1,display:{Lore:['{\"text\":\"The final ingredient\"}','{\"text\":\"in new town structures.\"}'],Name:'{\"text\":\"Building Permit\"}'},Enchantments:[{lvl:0,id:\"minecraft:protection\"}]}},{Slot:5b,id:\"minecraft:oak_leaves\",Count:16b},{Slot:6b,id:\"minecraft:stone\",Count:2b},{Slot:7b,id:\"minecraft:stone\",Count:2b},{Slot:8b,id:\"minecraft:stone\",Count:2b}]}"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:command",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "weight": 1,
+          "name": "bloomin_town:command/make_plants_base"
+        }
+      ]
+    }
+  ]
+}
