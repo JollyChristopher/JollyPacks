@@ -219,6 +219,67 @@ describe('Bloomin Town', function () {
             key: 'B'
           }
         }
+      },
+      {
+        id: 'greenhouse',
+        name: 'Greenhouse',
+        icon: 'minecraft:glass',
+        recipe: [
+          {
+            id: 'glass',
+            count: 4
+          },
+          {
+            id: 'glass',
+            count: 8
+          },
+          {
+            id: 'glass',
+            count: 4
+          },
+          {
+            id: 'composter',
+            count: 1
+          },
+          {
+            id: 'permit',
+            count: 1
+          },
+          {
+            id: 'oak_leaves',
+            count: 16
+          },
+          {
+            id: 'stone',
+            count: 2
+          },
+          {
+            id: 'stone',
+            count: 2
+          },
+          {
+            id: 'stone',
+            count: 2
+          }
+        ],
+        legend: {
+          glass: {
+            name: 'Glass',
+            key: 'G'
+          },
+          stone: {
+            name: 'Stone',
+            key: 'S'
+          },
+          composter: {
+            name: 'Composter',
+            key: 'C'
+          },
+          oak_leaves: {
+            name: 'Oak Leaves',
+            key: 'O'
+          }
+        }
       }
     ];
     it('should have root for recipes', function () {
@@ -388,6 +449,43 @@ describe('Bloomin Town', function () {
         });
       }, 10000)).should.be.true;
     });
+    it('should be able to build greenhouse', async function () {
+      this.timeout(30000);
+      minebot.chat('/give @s minecraft:glass 16');
+      minebot.chat('/give @s minecraft:composter');
+      minebot.chat('/give @s minecraft:stone 6');
+      minebot.chat('/give @s minecraft:oak_leaves 16');
+      minebot.chat(`/give @s minecraft:paper${permitText()}`);
+      minebot.chat('/tp @s 6 64 0');
+      await minebot.waitForTicks(10);
+      const dropperBlock = minebot.blockAt(new Vec3(7, 64, 0));
+      let dropper = await minebot.openContainer(dropperBlock);
+      dropper.on('updateSlot', (slot, oldItem, newItem) => {
+        if (slot < 9) minebot.chat(`planner update: ${itemToString(oldItem)} -> ${itemToString(newItem)} (slot: ${slot})`);
+      });
+      dropper.on('close', () => {
+        minebot.chat('planner closed');
+      });
+      console.log(dropper);
+      await minebot.transfer({ window: dropper, itemType: 77, count: 4, sourceStart: 36, destStart: 0, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 77, count: 8, sourceStart: 36, destStart: 1, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 77, count: 4, sourceStart: 36, destStart: 2, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 935, count: 1, sourceStart: 36, destStart: 3, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 677, count: 1, sourceStart: 36, destStart: 4, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 69, count: 16, sourceStart: 36, destStart: 5, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 36, destStart: 6, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 36, destStart: 7, sourceEnd: 50, destEnd: null });
+      await minebot.transfer({ window: dropper, itemType: 1, count: 2, sourceStart: 36, destStart: 8, sourceEnd: 50, destEnd: null });
+      dropper.close();
+      dropper = await minebot.openContainer(dropperBlock);
+      dropper.close();
+      minebot.chat('/tp @s 12 ~ -2');
+      (await asyncAssert(async () => {
+        return await minebot.nearestEntity((entity) => {
+          return entity.mobType === 'Villager' && entity.metadata[2] === '{"text":"Gardener"}' && entity.position.distanceTo(minebot.entity.position) < 8;
+        });
+      }, 10000)).should.be.true;
+    });
     it('should be able to get flowers to grow', async function () {
       this.timeout(30000);
       minebot.chat('/tp @s -1 64 -11');
@@ -412,6 +510,17 @@ describe('Bloomin Town', function () {
       console.log(barell.slots[0]);
       should.not.equal(barell.slots[0], null);
       barell.slots[0].name.should.be.oneOf(['honeycomb', 'honey_bottle', 'honey_block', 'honeycomb_block', 'bee_nest', 'bee_spawn_egg']);
+    });
+    it('should shuffle gardener trades', async function () {
+      this.timeout(30000); // Vec3 { x: 12.5, y: 64, z: -3.5 }
+      minebot.chat('/tp @s 13 64 -4');
+      await minebot.waitForTicks(10);
+      const villager = await minebot.nearestEntity((entity) => {
+        return entity.mobType === 'Villager' && entity.metadata[2] === '{"text":"Gardener"}' && entity.position.distanceTo(minebot.entity.position) < 8;
+      });
+      const tradeWindow = await minebot.openVillager(villager);
+      console.log(tradeWindow.trades[1].outputItem);
+      tradeWindow.trades[1].outputItem.name.should.not.equal('birch_leaves');
     });
     it('should be able to uninstall the pack', async function () {
       this.timeout(30000);

@@ -17,7 +17,7 @@
     "dist-bloomin-town": "cd build/bloomin_town && jszip-cli add ** > ../../dist/bloomin_town-${npm_package_versions_bloomin_town}.zip",
     "version-bloomin-town": "echo ${npm_package_versions_bloomin_town}",
     "dist-bloomin-town-snapshot": "cd build/bloomin_town_snapshot && jszip-cli add ** > ../../dist/bloomin_town_snapshot-${npm_package_versions_bloomin_town}.zip",
-    "prerun-server": "cpy 'dist/*.zip' servers/test/world/datapacks",
+    "prerun-server": "cpy 'dist/*.zip' servers/test/world/datapacks && cd servers/test/world/datapacks && find . -name '*_snapshot-*.zip' -exec rm {} +",
     "run-server": "docker run -d -p 25565:25565 --name minecraft -v /${PWD}/servers/test:/data -e EULA=TRUE -e VERSION=${mc_version} -e ENABLE_COMMAND_BLOCK=true -e SPAWN_PROTECTION=0 -e ONLINE_MODE=false -e MODE=creative -e WHITELIST=JollyChristopher,jollypack_tester -e OPS=JollyChristopher,jollypack_tester itzg/minecraft-server",
     "compile-server-world": "mkdirp servers/test && cpy --parents '**' ../test --cwd=servers/${mc_version}",
     "run-server-latest": "export mc_version=latest && npm run compile-server-world && export mc_version=LATEST && npm run run-server",
@@ -43,7 +43,7 @@
   "homepage": "https://github.com/halemaster/JollyPacks#readme",
   "versions": {
     "ore_exchange": "v1.0.1",
-    "bloomin_town": "v0.7.0"
+    "bloomin_town": "v1.0.0"
   },
   "semistandard": {
     "env": [
