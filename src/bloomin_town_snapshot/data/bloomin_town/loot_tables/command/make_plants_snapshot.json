@@ -7,97 +7,13 @@
           {
             "type": "minecraft:item",
             "weight": 1,
-            "name": "minecraft:oak_leaves",
-            "functions": [
-              {
-                "function": "minecraft:set_count",
-                "count": {
-                  "min": 1,
-                  "max": 1
-                }
-              }
-            ]
-          },
-          {
-            "type": "minecraft:item",
-            "weight": 1,
-            "name": "minecraft:birch_leaves",
-            "functions": [
-              {
-                "function": "minecraft:set_count",
-                "count": {
-                  "min": 1,
-                  "max": 1
-                }
-              }
-            ]
-          },
-          {
-            "type": "minecraft:item",
-            "weight": 1,
-            "name": "minecraft:dark_oak_leaves",
-            "functions": [
-              {
-                "function": "minecraft:set_count",
-                "count": {
-                  "min": 1,
-                  "max": 1
-                }
-              }
-            ]
-          },
-          {
-            "type": "minecraft:item",
-            "weight": 1,
-            "name": "minecraft:acacia_leaves",
-            "functions": [
-              {
-                "function": "minecraft:set_count",
-                "count": {
-                  "min": 1,
-                  "max": 1
-                }
-              }
-            ]
-          },
-          {
-            "type": "minecraft:item",
-            "weight": 1,
-            "name": "minecraft:jungle_leaves",
-            "functions": [
-              {
-                "function": "minecraft:set_count",
-                "count": {
-                  "min": 1,
-                  "max": 1
-                }
-              }
-            ]
-          },
-          {
-            "type": "minecraft:item",
-            "weight": 1,
-            "name": "minecraft:spruce_leaves",
-            "functions": [
-              {
-                "function": "minecraft:set_count",
-                "count": {
-                  "min": 1,
-                  "max": 1
-                }
-              }
-            ]
-          },
-          {
-            "type": "minecraft:item",
-            "weight": 1,
             "name": "minecraft:azalea_leaves",
             "functions": [
               {
                 "function": "minecraft:set_count",
                 "count": {
-                  "min": 1,
-                  "max": 1
+                  "min": 5,
+                  "max": 10
                 }
               }
             ]
@@ -110,8 +26,8 @@
               {
                 "function": "minecraft:set_count",
                 "count": {
-                  "min": 1,
-                  "max": 1
+                  "min": 5,
+                  "max": 10
                 }
               }
             ]
@@ -125,7 +41,7 @@
                 "function": "minecraft:set_count",
                 "count": {
                   "min": 1,
-                  "max": 1
+                  "max": 4
                 }
               }
             ]
@@ -134,6 +50,118 @@
             "type": "minecraft:item",
             "weight": 1,
             "name": "minecraft:flowering_azalea",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 1,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:hanging_roots",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 1,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:small_dripleaf",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 3,
+                  "max": 6
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:moss_block",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 6,
+                  "max": 12
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:glow_lichen",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 6,
+                  "max": 12
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:big_dripleaf",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 1,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:sculk_sensor",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 1,
+                  "max": 4
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:glow_berries",
+            "functions": [
+              {
+                "function": "minecraft:set_count",
+                "count": {
+                  "min": 4,
+                  "max": 8
+                }
+              }
+            ]
+          },
+          {
+            "type": "minecraft:item",
+            "weight": 1,
+            "name": "minecraft:spore_blossom",
             "functions": [
               {
                 "function": "minecraft:set_count",

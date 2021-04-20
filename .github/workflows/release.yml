@@ -80,3 +80,4 @@ jobs:
           prerelease: false
           files: |
             dist/bloomin_town-${{ steps.bloomin-town.outputs.version }}.zip
+            dist/bloomin_town_snapshot-${{ steps.bloomin-town.outputs.version }}.zip

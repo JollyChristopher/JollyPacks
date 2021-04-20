@@ -466,7 +466,6 @@ describe('Bloomin Town', function () {
       dropper.on('close', () => {
         minebot.chat('planner closed');
       });
-      console.log(dropper);
       await minebot.transfer({ window: dropper, itemType: 77, count: 4, sourceStart: 36, destStart: 0, sourceEnd: 50, destEnd: null });
       await minebot.transfer({ window: dropper, itemType: 77, count: 8, sourceStart: 36, destStart: 1, sourceEnd: 50, destEnd: null });
       await minebot.transfer({ window: dropper, itemType: 77, count: 4, sourceStart: 36, destStart: 2, sourceEnd: 50, destEnd: null });
@@ -512,15 +511,15 @@ describe('Bloomin Town', function () {
       barell.slots[0].name.should.be.oneOf(['honeycomb', 'honey_bottle', 'honey_block', 'honeycomb_block', 'bee_nest', 'bee_spawn_egg']);
     });
     it('should shuffle gardener trades', async function () {
-      this.timeout(30000); // Vec3 { x: 12.5, y: 64, z: -3.5 }
+      this.timeout(30000);
       minebot.chat('/tp @s 13 64 -4');
       await minebot.waitForTicks(10);
       const villager = await minebot.nearestEntity((entity) => {
         return entity.mobType === 'Villager' && entity.metadata[2] === '{"text":"Gardener"}' && entity.position.distanceTo(minebot.entity.position) < 8;
       });
       const tradeWindow = await minebot.openVillager(villager);
-      console.log(tradeWindow.trades[1].outputItem);
-      tradeWindow.trades[1].outputItem.name.should.not.equal('birch_leaves');
+      console.log(tradeWindow.trades.map(trade => trade.outputItem));
+      tradeWindow.trades.map(trade => { return { name: trade.outputItem.name, count: trade.outputItem.count }; }).should.not.deep.equal([{ name: 'oak_leaves', count: 10 }, { name: 'birch_leaves', count: 8 }, { name: 'spruce_leaves', count: 6 }, { name: 'dark_oak_leaves', count: 4 }, { name: 'jungle_leaves', count: 2 }, { name: 'acacia_leaves', count: 1 }]);
     });
     it('should be able to uninstall the pack', async function () {
       this.timeout(30000);
