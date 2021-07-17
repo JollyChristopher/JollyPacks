@@ -305,7 +305,7 @@ describe('Bloomin Town', function () {
     testRecipes('bloomin_town', recipes);
   });
 
-  describe('game tests', function () {
+  xdescribe('game tests', function () { // TODO: mineflayer does not support 1.17: https://github.com/PrismarineJS/mineflayer/pull/1993
     let minebot;
     this.beforeAll(function (done) {
       this.timeout(120000);
