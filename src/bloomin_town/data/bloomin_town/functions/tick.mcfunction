@@ -1,4 +1,6 @@
-# spread flowers and stock honey daily at noon
+# run noon functions
 execute if score $dayTime nitResourceTime matches 6000 run function bloomin_town:flower_spread
 execute if score $dayTime nitResourceTime matches 6000 run function bloomin_town:honey_make
-execute if score $dayTime nitResourceTime matches 6000 run function bloomin_town:gardener_stock
+
+# run constant functions
+execute run function bloomin_town:trades_rabbit_pen

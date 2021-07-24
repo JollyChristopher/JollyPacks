@@ -12,7 +12,7 @@
     "hidden": false
   },
   "rewards": {
-    "function": "bloomin_town:siteplanner/build_flower_shop"
+    "function": "bloomin_town:siteplanner/init_flower_shop"
   },
   "criteria": {
     "open-dropper": {

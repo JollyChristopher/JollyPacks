@@ -12,7 +12,7 @@
     "hidden": false
   },
   "rewards": {
-    "function": "bloomin_town:siteplanner/build_apiary"
+    "function": "bloomin_town:siteplanner/init_apiary"
   },
   "criteria": {
     "open-dropper": {

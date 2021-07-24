@@ -12,7 +12,7 @@
     "hidden": false
   },
   "rewards": {
-    "function": "bloomin_town:siteplanner/build_greenhouse"
+    "function": "bloomin_town:siteplanner/init_greenhouse"
   },
   "criteria": {
     "open-dropper": {
