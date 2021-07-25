@@ -1,0 +1,2 @@
+execute as @e[tag=bloomin_town.rabbit_tender,nbt={VillagerData:{level:5}}] at @s run data modify entity @s Offers.Recipes[10].sell.tag set from block ~ ~1 ~ 
+execute as @e[tag=bloomin_town.rabbit_tender,nbt={VillagerData:{level:5}}] at @s run setblock ~ ~1 ~ air replace
