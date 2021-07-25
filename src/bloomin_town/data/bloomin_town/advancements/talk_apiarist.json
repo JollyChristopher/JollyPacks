@@ -1,0 +1,27 @@
+{
+    "parent": "bloomin_town:bloomin_town",
+    "display": {
+        "title": "Talk Apiarist",
+        "description": "",
+        "icon": {
+            "item": "minecraft:sweet_berries"
+        },
+        "frame": "task",
+        "announce_to_chat": false,
+        "show_toast": false,
+        "hidden": false
+    },
+    "rewards": {
+      "function": "bloomin_town:talk_apiarist"
+    },
+    "criteria": {
+        "trades": {
+            "trigger": "minecraft:player_interacted_with_entity",
+            "conditions": {
+                "entity": {
+                    "nbt": "{Tags:[\"bloomin_town.apiarist\"]}"
+                }
+            }
+        }
+    }
+}

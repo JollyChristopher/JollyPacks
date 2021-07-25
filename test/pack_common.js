@@ -1,6 +1,3 @@
-const readline = require('readline');
-const fs = require('fs');
-
 exports.packTests = function (pack) {
   const base = `../build/${pack}/data/global/advancements`;
   it('should have root', function () {
@@ -99,7 +96,7 @@ exports.testRecipes = function (namespace, recipes) {
         hidden: false
       });
       json.should.have.deep.property('rewards', {
-        function: `${namespace}:siteplanner/build_${recipe.id}`
+        function: `${namespace}:siteplanner/init_${recipe.id}`
       });
       json.should.have.deep.property('criteria', {
         'open-dropper': {
@@ -114,41 +111,6 @@ exports.testRecipes = function (namespace, recipes) {
           }
         }
       });
-    });
-
-    it(`should have building function for ${namespace}:${recipe.id}`, async function () {
-      const lineReader = readline.createInterface({
-        input: fs.createReadStream(`./build/${namespace}/data/${namespace}/functions/siteplanner/build_${recipe.id}.mcfunction`)
-      });
-      const lines = [];
-      for await (const line of lineReader) {
-        lines.push(line);
-      }
-      lines.should.be.deep.equal([
-        `advancement revoke @s only ${namespace}:recipes/recipe_${recipe.id}`,
-        '',
-        `execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteEast] run setblock ~ ~1 ~ minecraft:structure_block{ignoreEntities:0b,rotation:"NONE",posX:1,mode:"LOAD",posY:-4,sizeX:15,posZ:-7,integrity:1.0f,name:"${namespace}:town/${recipe.id}",sizeY:32,sizeZ:15} replace`,
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteEast] run setblock ~ ~2 ~ minecraft:redstone_block',
-        '',
-        `execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteWest] run setblock ~ ~1 ~ minecraft:structure_block{ignoreEntities:0b,rotation:"NONE",posX:-15,mode:"LOAD",posY:-4,sizeX:15,posZ:-7,integrity:1.0f,name:"${namespace}:town/${recipe.id}",sizeY:32,sizeZ:15} replace`,
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteWest] run setblock ~ ~2 ~ minecraft:redstone_block',
-        '',
-        `execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteNorth] run setblock ~ ~1 ~ minecraft:structure_block{ignoreEntities:0b,rotation:"NONE",posX:-7,mode:"LOAD",posY:-4,sizeX:15,posZ:-15,integrity:1.0f,name:"${namespace}:town/${recipe.id}",sizeY:32,sizeZ:15} replace`,
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteNorth] run setblock ~ ~2 ~ minecraft:redstone_block',
-        '',
-        `execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteSouth] run setblock ~ ~1 ~ minecraft:structure_block{ignoreEntities:0b,rotation:"NONE",posX:-7,mode:"LOAD",posY:-4,sizeX:15,posZ:1,integrity:1.0f,name:"${namespace}:town/${recipe.id}",sizeY:32,sizeZ:15} replace`,
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s if entity @s[tag=nitSiteSouth] run setblock ~ ~2 ~ minecraft:redstone_block',
-        '',
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s run function nitk:siteplanner/new_sites_check',
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s run function nitk:siteplanner/attacks_check',
-        '',
-        'tag @a add nitCitizen',
-        'tag @e[type=minecraft:villager,distance=..20] add nitCitizen',
-        'scoreboard players operation @e[tag=nitCitizen,distance=..20] nitID = @e[tag=nitKTP,limit=1,sort=nearest] nitID',
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s run fill ~ ~ ~ ~ ~3 ~ air',
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s run kill @e[tag=!nitCitizen,distance=..2,tag=!global.ignore,tag=!global.ignore.kill]',
-        'execute as @e[tag=nitKSitePlanner,limit=1,sort=nearest,distance=..3] at @s run kill @s'
-      ]);
     });
   });
 };

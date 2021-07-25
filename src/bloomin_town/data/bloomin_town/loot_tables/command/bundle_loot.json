@@ -1,0 +1,210 @@
+{
+    "type": "minecraft:command",
+    "pools": [
+      {
+        "rolls": 2,
+        "entries": [
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/abandoned_mineshaft"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/bastion_bridge"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/bastion_other"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/bastion_hoglin_stable"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/bastion_treasure"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 3,
+            "name": "minecraft:chests/spawn_bonus_chest"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/buried_treasure"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/desert_pyramid"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/simple_dungeon"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/end_city_treasure"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/igloo_chest"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/jungle_temple"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/nether_bridge"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/pillager_outpost"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/ruined_portal"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/shipwreck_map"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/shipwreck_supply"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/shipwreck_treasure"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/stronghold_corridor"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/stronghold_library"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/stronghold_crossing"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/underwater_ruin_big"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/underwater_ruin_small"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/village_armorer"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_butcher"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_cartographer"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_desert_house"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_fisher"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_fletcher"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_mason"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_plains_house"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_savanna_house"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_shepard"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_snowy_house"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_taiga_house"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_tannery"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 2,
+            "name": "minecraft:chests/village_temple"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/village_toolsmith"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/village_weaponsmith"
+          },
+          {
+            "type": "minecraft:loot_table",
+            "weight": 1,
+            "name": "minecraft:chests/woodland_mansion"
+          }
+        ]
+      }
+    ]
+  }
