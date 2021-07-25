@@ -9,7 +9,7 @@
         "frame": "task",
         "announce_to_chat": false,
         "show_toast": false,
-        "hidden": false
+        "hidden": true
     },
     "rewards": {
       "function": "bloomin_town:talk_rabbit_tender"
