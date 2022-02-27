@@ -114,18 +114,3 @@ exports.testRecipes = function (namespace, recipes) {
     });
   });
 };
-
-const debugWait = exports.debugWait = async function (time = 20000) {
-  await new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
-};
-
-exports.asyncAssert = async function (assertFunc, timeout = 1000) {
-  const start = Date.now();
-  while (Date.now() - start < timeout) {
-    if (await assertFunc()) return true;
-    await debugWait(1000);
-  }
-  return false;
-};
