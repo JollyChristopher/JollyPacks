@@ -1,29 +1,8 @@
 const { should } = require('chai');
 should();
 const { packTests } = require('./pack_common.js');
-// const { startServer, endServer } = require('./server.js');
 
 describe('Ore Exchange', function () {
-  // let minebot;
-  // this.beforeAll(function(done) {
-  //   this.timeout(120000);
-  //   startServer('snapshot').then((bot) => {
-  //     minebot = bot;
-  //     done();
-  //   }).catch(error => {
-  //     done(error);
-  //   });
-  // });
-
-  // this.afterAll(function(done) {
-  //   this.timeout(5000);
-  //   endServer(minebot).then(() => {
-  //     done();
-  //   }).catch(error => {
-  //     done(error);
-  //   });
-  // });
-
   describe('installed datapacks advancements', function () {
     packTests('ore_exchange');
     it('should have ore_exchange', function () {
