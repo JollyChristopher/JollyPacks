@@ -33,7 +33,7 @@
   "homepage": "https://github.com/halemaster/JollyPacks#readme",
   "versions": {
     "ore_exchange": "v1.0.2",
-    "bloomin_town": "v2.0.0"
+    "bloomin_town": "v2.0.1"
   },
   "semistandard": {
     "env": [
